@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeMon Search App</title>
+
+    <!-- icon -->
+    <link rel="icon" type="image/png" href="">
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- font awesome -->
+
+    <!-- google fonts -->
+
+</head>
+
+<body style="background-color: #c9d6ff; background: linear-gradient(to right,#cfbf2a,#c9d6ff);">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 card container-fluid shadow-lg bg-white  " style="width: 24rem; top: 100px; ">
+            <div class="card-body">
+                <h5 class="card-title text-center fs-3 mb-3 mt-4">PokeMon Search App</h5>
+                <input type="text" class="form-control" placeholder="Search Here" id="pokemonname">
+                <a href="#" class="btn btn-primary form-control mt-3" onclick="searchbtn()">Search</a>
+                <div id="result"> </div>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</body>
+
+<script>
+
+    function searchbtn() {
+        try {
+            var pokemonName = document.getElementById("pokemonname").value
+            console.log(pokemonName);
+            if (pokemonName == "") {
+                alert("Please enter the field !")
+            } else {
+                fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+                    .then(data => data.json())
+                    .then(data => displayBtn(data))
+            }
+        }
+        catch {
+            console.log("Result Not found!");
+        }
+    }
+
+
+    function displayBtn(data) {
+        htmlData = `<h3 class="mt-4 fs-2 mb-3 text-center">${data.name})</h3>
+                  <p><b style="font-size:18px">Height :</b> &nbsp ${data.height}</p>
+                  <p><b style="font-size:18px">Weight :</b> &nbsp ${data.weight}</p>
+                  <p><b style="font-size:18px">Type :</b> &nbsp  ${data.types}</p> 
+                  `
+        result.innerHTML = htmlData
+    }
+
+
+</script>
+
+</html>
